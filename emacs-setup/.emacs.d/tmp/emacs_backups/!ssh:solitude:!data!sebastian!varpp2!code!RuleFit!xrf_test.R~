@@ -1,0 +1,166 @@
+#!/usr/bin/env Rscript
+
+# Note: The code is modified to only save the model as a R object
+# Running VARPP across all hpo terms
+
+library(varppRuleFit)
+library(tidyverse)
+library(optparse)
+library(precrec)
+
+sessionInfo()
+dark <- FALSE;
+error <- 0;
+option_list = list(
+  make_option(c("-b", "--benign"),
+              type="character",
+              default=NULL,
+              help="File containing benign variants.",
+              metavar="character"),
+  make_option(c("-p", "--pathogenic"),
+              type="character",
+              default=NULL,
+              help="File containing disease associated variants.",
+              metavar="character"),
+  make_option(c("-e", "--hpo"),
+              type="character",
+              default=NULL,
+              help="File containing hpo term associated genes.",
+              metavar="character"),
+  make_option(c("-n", "--ntree"),
+              type="integer",
+              default=2000,
+              help="Number of trees.",
+              metavar="character"),
+  make_option(c("-o", "--output"),
+              type="character",
+              default=NULL,
+              help="Output file name.",
+              metavar="character")
+
+);
+
+opt_parser <- OptionParser(option_list=option_list,
+                           description = "\nVARPP script.",
+                           epilogue = "Example:\n\n  ./VARPP.sh -b <benign_variants-.txt> -p <disease_variants.txt> -e <HPO_term> -n <number of trees> -o <VARPP_out>  \n\n");
+
+opt <- parse_args(opt_parser)
+
+error <-  opt$error
+
+summaryfilename <- opt$summary
+
+if (is.null(opt$benign)){
+  print_help(opt_parser)
+  stop("Missing benign file!\n", call.=FALSE)
+}
+if (is.null(opt$pathogenic)){
+  print_help(opt_parser)
+  stop("Missing pathogenic file!\n", call.=FALSE)
+}
+
+if (is.null(opt$hpo)){
+  print_help(opt_parser)
+  stop("Missing HPO name!\n", call.=FALSE)
+}
+
+if (is.null(opt$output)){
+  print_help(opt_parser)
+  stop("Missing output file name!\n", call.=FALSE)
+}
+
+VARPPcheckForFile <- function(x)
+{
+  if(!file.exists(x)){
+    print_help(opt_parser)
+    stop(paste("File",x," not found!\n"), call.=FALSE)
+
+  }
+}
+
+VARPPcheckForFile(opt$benign)
+VARPPcheckForFile(opt$pathogenic)
+#VARPPcheckForFile(opt$hpo)
+
+
+
+
+benign_variant_file     <- opt$benign
+pathogenic_variant_file <- opt$pathogenic
+hpo                     <- opt$hpo
+ntree                   <- opt$ntree
+maxdepth                <- 3
+rules                   <- 10
+lasso                   <- 100
+out_file                <- opt$output
+
+#benign_variant_file     <- "/data/sebastian/varpp2/data/benign_hcl.csv"
+#pathogenic_variant_file <- "/data/sebastian/varpp2/data/patho_hcl.csv"
+#hpo                     <- "HP:0000591"
+#ntree                   <- 2000
+#out_file                <- "/data/scratch/Seb/VARPP2-paper-tests/results/RuleFit-all-hpo-terms/"
+
+
+# Test the best performers from Denise that I also have available in my data
+
+
+
+# Read the pathogenic variant file
+    patho <- read_csv(pathogenic_variant_file)
+
+# Read the benign variants
+    benign <- read_csv(benign_variant_file)
+
+    genes <- read_delim(paste0("/data/sebastian/varpp2/data/hpo/",hpo), delim="\t")
+# Get the gene names
+    hpo_gene_names <- genes$Gene
+
+# Filter the genes that we got from phenolyzer
+    patho %>%
+        filter(Gene %in% hpo_gene_names) %>%
+        select(-c(CADD_raw_rankscore)) %>%
+        rename(CADD_raw_rankscore = CADD_PHRED_SCORE) -> varpp_patho
+    varpp_patho <- varpp_patho[,c(1,2,4,3,7:length(names(varpp_patho)))]
+#    varpp_patho <- varpp_patho[,c(1,2,4,3,7:47)]
+
+# Filter out the benign genes that are in the pathogenic gene list
+    benign %>%
+        filter(!Gene %in% intersect(benign$Gene, patho$Gene)) %>%
+        select(-c(CADD_raw_rankscore)) %>%
+        rename(CADD_raw_rankscore = CADD_PHRED_SCORE) -> varpp_benign
+    varpp_benign <- varpp_benign[,c(1,2,4,3,7:length(names(varpp_benign)))]
+#    varpp_benign <- varpp_benign[,c(1,2,4,3,7:47)]    
+
+# Create the input data for varppRuleFit
+    gtex_data <- list(dat=data.frame(rbind(varpp_patho, varpp_benign)), disease_variants=data.frame(varpp_patho), benign_variants=data.frame(varpp_benign))
+
+    x <- rule_fit(data=gtex_data,
+                  y="Pathogenic",
+                  two_level_bootstrap = TRUE,
+                  ntree = ntree,
+                  max.depth = maxdepth,
+                  rule.filter = rules,
+                  bootstrap.rounds = lasso,
+                  rule.extract.cores = 16,
+                  kappa.cores = 10,
+                  lasso.cores = 16,
+                  ranger.and.rulefit = FALSE,
+                  report = FALSE)
+
+ #   model_results <- twostep_auPRC_table_no_rf(x) %>% mutate (hpo=hpo)
+
+#rule_frame <- ruleVarImp(x)
+
+#write_csv(model_results, paste0(out_file,hpo,".csv"))
+#write_csv(rule_frame,paste0(out_file, "Rules_for_",hpo,".csv"))
+saveRDS(x, paste0(out_file,hpo,"_RuleFit.rds"))
+
+
+
+
+# To extract all the tissues
+#plyr::count(unlist(str_extract_all(as.vector(unlist(rules[grep("rule",rules$Variable), "Description"])), "[A-Z_a-z]+"))) %>% arrange(desc(freq))
+
+
+
+

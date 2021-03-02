@@ -1,0 +1,60 @@
+# Combine the rsem results for DESeq
+# Sebastian Rauschert, PhD
+# 14/01/2021
+
+library(tidyverse)
+
+path <- "/data/scratch/Seb/RNAseq/rna/0fa8a663-a2bd-4fe4-81eb-3c657049b672/EHMT1_knockout_2/rsem_quant/"
+# Specify the inputsm as they map to the "rep1, rep2, rep3" in the pipeline output, just like the files were
+# specified in the INPUT.json
+input_order <- c("CF9", "CF10", "CF11", "CF12", "CF1", "CF2", "CF3", "CF4", "CF5", "CF6", "CF7", "CF8")
+
+
+# Load the first file so we can append in the loop
+file <- list.files(paste0(path,"rep1"))[grep("rsem.genes",list.files(paste0(path,"rep1")))]
+rna  <- read.table(paste0(path,"rep1/", file), header=T)
+rna <- rna %>%
+    select("gene_id", "transcript_id.s.", "FPKM") %>%
+    rename(!!input_order[1] := FPKM)
+
+for(i in 2:12) {
+
+    file <- list.files(paste0(path,"rep",i))[grep("rsem.genes",list.files(paste0(path,"rep",i)))]
+    dat  <- read.table(paste0(path,"rep",i, "/", file), header=T)
+    dat  <- dat %>%
+    select("gene_id", "transcript_id.s.", "FPKM") %>%
+    rename(!!input_order[i] := FPKM)
+
+
+
+    rna <- merge(rna, dat[,c("gene_id", input_order[i])], by="gene_id", keep.all=T)
+    
+    }
+
+
+write_csv(rna, "/data/scratch/Seb/RNAseq/EHMT1_gene_count_matrix.csv")
+
+
+#========================================================================================================
+# tximport
+#========================================================================================================
+
+library(DESeq2)
+library(tximport)
+library(tidyverse)
+
+path <- "/data/scratch/Seb/RNAseq/rna/0fa8a663-a2bd-4fe4-81eb-3c657049b672/EHMT1_knockout_2/rsem_quant/"
+
+files = NULL
+
+for(i in 1:12) {
+
+    files <- c(files, paste0(path,"rep",i,"/", list.files(paste0(path,"rep",i))[2]))
+    
+}
+
+names(files) <- c("CF9", "CF10", "CF11", "CF12", "CF1", "CF2", "CF3", "CF4", "CF5", "CF6", "CF7", "CF8")
+txi.rsem     <- tximport(files, type = "rsem", txIn = FALSE, txOut = FALSE)
+head(txi.rsem$counts)
+
+save(txi.rsem, file="~/HEK_ROUND2.RData")

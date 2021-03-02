@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Unlock the file to wortk with it 
+datalad unlock data/fasta/Upregulated_500.fa.out
+datalad unlock data/fasta/Background.fa.out
+
+# Rund Dreme
+singularity/meme.simg dreme -verbosity 1 \
+                      -oc output/dreme-out/up_background \
+                      -dna \
+                      -p data/fasta/Upregulated_500.fa.out \
+                      -n data/fasta/Background.fa.out \
+                      -t 18000 \
+                      -e 0.05 \
+                      -maxk 20

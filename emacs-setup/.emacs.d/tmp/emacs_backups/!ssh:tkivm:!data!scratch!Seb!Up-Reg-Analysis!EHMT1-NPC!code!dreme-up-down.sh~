@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Unlock the file to wortk with it 
+datalad unlock Upregulated_500.fa.out
+datalad unlock Downregulated_500.fa.out

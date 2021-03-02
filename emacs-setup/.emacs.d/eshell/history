@@ -1,0 +1,128 @@
+cd ..
+cd /
+ssh tkivm
+cd ..
+whoami
+ssh solitude 
+cd VARPP-results/
+mkdir results
+datalad save -m "Add code for VARPP results"
+cd results/
+pwd 
+cd /data
+cd 
+cd /data
+cd /data
+cd /ssh:solitude:/data
+cd sebastian/
+cd varpp2/
+cd results/
+cd varpp-hcl/
+clear
+cd /data
+cd ..
+cd sebastian/
+cd ..
+cd sebastian/
+s
+cd 
+cd /ssh:solitude:/data/home/sebastian
+cd ../..
+cd sebastian/
+cd  
+cd /ssh:solitude:/data/home/sebastian
+cd ../../sebastian/varpp2/
+cd data/
+l
+cd ENCODE/
+cd ..
+cd ..
+cd results/
+mkdir varpp-encode
+cd ..
+cd data/
+head varpp2-hcl.csv
+cd /ssh:solitude://
+cd data
+cd sebastian/
+cd /ssh:solitude:~
+cd ..
+cd ..
+cd ..
+cd home/
+cd ubuntu/
+cd ..
+cd ..
+cd ..
+cd home
+l
+cd ..
+cd data
+cd sebastian/
+cd  
+cd /ssh:solitude:/data/sebastian
+cd varpp2/
+cd results/
+cd rulefit/
+cd GTEx/
+cd run_
+cd run_1
+>cd ../..
+cd ../..
+cd HCL_run/
+cd /ssh:solitude://data/sebastian/varpp2/results/varpp-encode/
+ls
+cd ..
+ls
+cd ..
+ls
+cd data
+ls
+cd hpo
+ld
+ls
+cd ..
+ls
+cd GATA4/
+ls
+ls -lth
+cd ..
+ls
+cd ..
+ls
+cd KOLF_NPC_analysis/
+ls
+cd genomicsWA_workflow/
+ls
+cd inputs/
+cd ..
+cd indices/
+ls
+cd ..
+ls
+cd ..
+ls
+cd rna/
+ls
+cd  
+cd /ssh:tkivm:/data/scratch/Seb/RNAseq/KOLF_NPC_analysis/rna
+ls
+cd 0fa8a663-a2bd-4fe4-81eb-3c657049b672/
+ls
+cd ../../../
+ls
+cd rna/
+cd 088310a6-bc28-4e96-b9e7-8f1d48de55a3/
+ls
+cd call-align/
+ls
+pwd
+ks
+ls
+cd ..
+ls
+cd data
+ls
+cd ..
+ls
+tree

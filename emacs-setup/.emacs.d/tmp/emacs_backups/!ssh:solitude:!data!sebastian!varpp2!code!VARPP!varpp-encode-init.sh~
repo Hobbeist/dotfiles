@@ -1,0 +1,8 @@
+#!/bin/sh
+
+hpo=`ls /data/sebastian/varpp2/data/hpo`
+
+for i in $hpo
+do
+	     ./varpp2-hcl-slurm.sh -t 16 -m 15 -e $i -b /data/sebastian/varpp2/data/benign_hcl.csv -p /data/sebastian/varpp2/data/patho_hcl.csv  -n 2000 -o /data/sebastian/varpp2/results/varpp-hcl/
+done

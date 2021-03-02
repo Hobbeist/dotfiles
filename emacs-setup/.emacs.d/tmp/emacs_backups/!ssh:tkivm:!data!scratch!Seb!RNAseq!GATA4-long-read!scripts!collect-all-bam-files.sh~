@@ -1,0 +1,5 @@
+#!/bin/sh
+
+BAMLOC='/data/scratch/Seb/RNAseq/rna/088310a6-bc28-4e96-b9e7-8f1d48de55a3/call-align'
+
+echo $BAMLOC

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# First, use bedtools to sort the bedfiles we created in the last step
+
+bedtools sort -i data/bedfiles/Downregulated_500bp.bed > data/bedfiles/Downregulated_500bp_sorted.bed
+bedtools sort -i data/bedfiles/Upregulated_500bp.bed > data/bedfiles/Upregulated_500bp_sorted.bed

@@ -1,0 +1,1158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-03-01 Mon 17:32 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Some Data Science Knowledge</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Sebastian Rauschert, PhD" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Some Data Science Knowledge</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgfc8422b">1. Machine Learning</a>
+<ul>
+<li><a href="#org9080f77">1.1. Different models</a>
+<ul>
+<li><a href="#org0de45cf">1.1.1. Random Forest versus Support Vector Machine</a></li>
+<li><a href="#orgf27b909">1.1.2. Naive Bayes</a></li>
+<li><a href="#orgedf2f8b">1.1.3. Linear Model</a></li>
+</ul>
+</li>
+<li><a href="#org05ec6b8">1.2. Model Metrics</a>
+<ul>
+<li><a href="#org5d202e0">1.2.1. Recall and Recall</a></li>
+<li><a href="#org5a30530">1.2.2. False Positives and False Negatives</a></li>
+<li><a href="#org5282cb4">1.2.3. Adjusted R<sup>2</sup> in multiple linear regression</a></li>
+<li><a href="#org7d4d66e">1.2.4. Mean Squared Error (MSE)</a></li>
+<li><a href="#org17d4077">1.2.5. F-Test</a></li>
+<li><a href="#org00546a5">1.2.6. RMSE: Root Mean Square Error</a></li>
+</ul>
+</li>
+<li><a href="#orgb5d07e3">1.3. Mathematical topics</a>
+<ul>
+<li><a href="#orgbbe95c2">1.3.1. The Kernel Trick</a></li>
+</ul>
+</li>
+<li><a href="#orgd4a7486">1.4. Training models</a></li>
+</ul>
+</li>
+<li><a href="#org07f8f8a">2. Statistics, Probability and Mathematics</a>
+<ul>
+<li><a href="#org6357a8b">2.1. Statistics</a>
+<ul>
+<li><a href="#org0db0709">2.1.1. Central Limit Theorem</a></li>
+<li><a href="#org7e0f579">2.1.2. Hypothesis Testing</a></li>
+<li><a href="#org0f6eb7e">2.1.3. p-value</a></li>
+<li><a href="#org0c53be2">2.1.4. Confidence intervall</a></li>
+<li><a href="#org7e41925">2.1.5. Statistical power</a></li>
+<li><a href="#org7b38408">2.1.6. Type I and II error</a></li>
+<li><a href="#orged7c396">2.1.7. How to detect outliers</a></li>
+<li><a href="#org13475be">2.1.8. Maximum Likelihood Estimation</a></li>
+<li><a href="#org82f6ac4">2.1.9. Correlation</a></li>
+<li><a href="#org4a0fdc6">2.1.10. Simpson's Paradox</a></li>
+<li><a href="#org2d1726e">2.1.11. Confounding variable</a></li>
+<li><a href="#org62afd46">2.1.12. </a></li>
+</ul>
+</li>
+<li><a href="#org71690d5">2.2. Basic Probability Theory</a>
+<ul>
+<li><a href="#org1e92cf4">2.2.1. Probability Rules</a></li>
+<li><a href="#org07923ed">2.2.2. The Law of Total Probability</a></li>
+</ul>
+</li>
+<li><a href="#orgb41cf37">2.3. Joint, Marginal and Conditional Probability</a>
+<ul>
+<li><a href="#org9c45fa0">2.3.1. Probability of one varible</a></li>
+<li><a href="#orgc113f18">2.3.2. Probability of multiple random variables</a></li>
+</ul>
+</li>
+<li><a href="#org7660a81">2.4. Bayes Theorem (conditional probability)</a>
+<ul>
+<li><a href="#org5a14214">2.4.1. The Theorem</a></li>
+<li><a href="#org7654b6f">2.4.2. Some notations</a></li>
+<li><a href="#orgbaf0c0b">2.4.3. Machine learning models where it is used</a></li>
+</ul>
+</li>
+<li><a href="#orgd071abc">2.5. Contingency table and binary classification</a></li>
+</ul>
+</li>
+<li><a href="#org28c6182">3. Probability examples</a>
+<ul>
+<li><a href="#org7543c6c">3.1. Example 1: Cancer screening</a></li>
+<li><a href="#orgb516f5a">3.2. Example 2: The Birthday problem</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<hr />
+<div id="outline-container-orgfc8422b" class="outline-2">
+<h2 id="orgfc8422b"><span class="section-number-2">1</span> Machine Learning</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org9080f77" class="outline-3">
+<h3 id="org9080f77"><span class="section-number-3">1.1</span> Different models</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-org0de45cf" class="outline-4">
+<h4 id="org0de45cf"><span class="section-number-4">1.1.1</span> Random Forest versus Support Vector Machine</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+There are a few reasons that speak for Random Forest as the better model.<br />
+</p>
+<ol class="org-ol">
+<li>Random Forestes have feature importance<br /></li>
+<li>Random Forestes are quicker and simpler to build than an SVM<br /></li>
+<li>For multi-class classification problems, SVMs require a one-vsrest method,<br />
+which is less scalable and more memory intensive.<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgf27b909" class="outline-4">
+<h4 id="orgf27b909"><span class="section-number-4">1.1.2</span> Naive Bayes</h4>
+<div class="outline-text-4" id="text-1-1-2">
+</div>
+<ol class="org-ol">
+<li><a id="org6e788f3"></a>Drawbacks<br />
+<div class="outline-text-5" id="text-1-1-2-1">
+<p>
+One major drawback of Naive Bayes is that it holds a strong assumption in that the features<br />
+are assumend to be uncorrelated with one another, which typically is never the case.<br />
+</p>
+
+<p>
+One way to improve such an algorithm that uses Naive Bayes is by decorrelating the<br />
+features so that the assupmtion holds true.<br />
+</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgedf2f8b" class="outline-4">
+<h4 id="orgedf2f8b"><span class="section-number-4">1.1.3</span> Linear Model</h4>
+<div class="outline-text-4" id="text-1-1-3">
+</div>
+<ol class="org-ol">
+<li><a id="orga5a2b82"></a>Assumptions<br />
+<div class="outline-text-5" id="text-1-1-3-1">
+<ol class="org-ol">
+<li>The samples data used to fit the model is <b>representative of the population</b><br /></li>
+<li>The relationship between X and y is <b>linear</b><br /></li>
+<li>The variance of the residual is the same for any value of X (<b>homoscedasticity</b>)<br /></li>
+<li>Observations are <b>independent</b> of each other<br /></li>
+<li>For any value of X, y is <b>normally distributed</b><br /></li>
+</ol>
+</div>
+</li>
+<li><a id="orgebf96d1"></a>Multicollinearity<br />
+<div class="outline-text-5" id="text-1-1-3-2">
+<p>
+Multicollinearity exist when an independent variable is highly correlated with another independent<br />
+variable in a multiple linear regression equation. This can be problematic because it undermines the statistical significance of an independet variable.<br />
+</p>
+
+<p>
+One could use the <b>Variance Inflation Factor (VIF)</b> to determine of there is any multicollinearity between the independent variables -<br />
+a standard benchmark is that if the <b>VIF</b> is greater than 5, then multicollinearity is present.<br />
+</p>
+</div>
+</li>
+
+<li><a id="org622c970"></a>Drawbacks<br />
+<div class="outline-text-5" id="text-1-1-3-3">
+<ul class="org-ul">
+<li>A linear model holds some strong assumptions that may not be true in application.<br />
+It assumes a <b>linear relationship</b>, <b>multivariate normality</b>, <b>no or little multicollinearity</b>, and<br />
+<b>homoscedasticity</b><br /></li>
+<li>A linear model can't be used for discrete or binary outcomes.<br /></li>
+<li>You can't vary the flexibility of a linear model<br /></li>
+</ul>
+
+
+<hr />
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org05ec6b8" class="outline-3">
+<h3 id="org05ec6b8"><span class="section-number-3">1.2</span> Model Metrics</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-org5d202e0" class="outline-4">
+<h4 id="org5d202e0"><span class="section-number-4">1.2.1</span> Recall and Recall</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+<span class="underline">Recall</span> attempts to answer the question: "What proportion of actual positives was identified correctly?"<br />
+</p>
+
+<p>
+\[Precision = \frac{TP}{TP + FN}\]<br />
+</p>
+
+<p>
+<span class="underline">Precision</span> attempts to answer the question: "What proportion of positive identifications was actually correct ?"<br />
+</p>
+
+<p>
+\[Recall = \frac{TP}{TP + FP}\]<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org5a30530" class="outline-4">
+<h4 id="org5a30530"><span class="section-number-4">1.2.2</span> False Positives and False Negatives</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<ul class="org-ul">
+<li>A <b>false positive</b> is an incorrect identification of the presence of a condition, when it is absent.<br /></li>
+
+<li>A <b>false negative</b> is an incorrect identification of the absence of a condition, when it is actually present .<br />
+
+<ul class="org-ul">
+<li>A <b>false negative</b> can be more important than a <b>false positive</b>, when screening for cancer. It is much worse to say that someone does<br />
+not have cancer, when they do, instead of saying that someone does and later realizing they do not.<br /></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5282cb4" class="outline-4">
+<h4 id="org5282cb4"><span class="section-number-4">1.2.3</span> Adjusted R<sup>2</sup> in multiple linear regression</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+R<sup>2</sup> is a measurement that tells you to what extent the proportion of variance in the dependent variable is explained by the variance in the independent variables. In simpler terms, while the coefficients estimate trends, R<sup>2</sup> represents the scatter around the line of best fit.<br />
+</p>
+
+<p>
+However, every additional independent variable added to a model always increases the R<sup>2</sup> value — therefore, a model with several independent variables may seem to be a better fit even if it isn’t. This is where adjusted R<sup>2</sup> comes in. The adjusted R<sup>2</sup> compensates for each additional independent variable and only increases if each given variable improves the model above what is possible by probability. This is important since we are creating a multiple regression model.<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org7d4d66e" class="outline-4">
+<h4 id="org7d4d66e"><span class="section-number-4">1.2.4</span> Mean Squared Error (MSE)</h4>
+<div class="outline-text-4" id="text-1-2-4">
+<p>
+<b>MSE</b> gives relatively high weight to large errors - therefore, <b>MSE</b> tends to put too much emphasis on large deviations.<br />
+A more robust alternative is <b>MAE</b> (mean absolute deviation).<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org17d4077" class="outline-4">
+<h4 id="org17d4077"><span class="section-number-4">1.2.5</span> F-Test</h4>
+<div class="outline-text-4" id="text-1-2-5">
+<p>
+Evaluates the null hypothesis that all regression coefficients are equal to zero vs the alternative hypothesis that at least one doesn't equal zero<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org00546a5" class="outline-4">
+<h4 id="org00546a5"><span class="section-number-4">1.2.6</span> RMSE: Root Mean Square Error</h4>
+<div class="outline-text-4" id="text-1-2-6">
+<p>
+<b>Root Mean Square Error (RMSE)</b> is the standard deviation of the residuals (prediction errors). Residuals are a measure of how far from the regression line data points are; RMSE is a measure of how spread out these residuals are. In other words, it tells you how concentrated the data is around the line of best fit.<br />
+</p>
+<hr />
+</div>
+</div>
+</div>
+<div id="outline-container-orgb5d07e3" class="outline-3">
+<h3 id="orgb5d07e3"><span class="section-number-3">1.3</span> Mathematical topics</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-orgbbe95c2" class="outline-4">
+<h4 id="orgbbe95c2"><span class="section-number-4">1.3.1</span> The Kernel Trick</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+A kernel is a way of computing the dot product of two vectors 𝐱x and 𝐲y in some (possibly very high dimensional) feature space, which is why kernel functions are sometimes called “generalized dot product”<br />
+</p>
+
+<p>
+The kernel trick is a method of using a linear classifier to solve a non-linear problem by transforming linearly inseparable data to linearly separable ones in a higher dimension.<br />
+</p>
+
+
+<hr />
+</div>
+</div>
+</div>
+<div id="outline-container-orgd4a7486" class="outline-3">
+<h3 id="orgd4a7486"><span class="section-number-3">1.4</span> Training models</h3>
+</div>
+</div>
+<div id="outline-container-org07f8f8a" class="outline-2">
+<h2 id="org07f8f8a"><span class="section-number-2">2</span> Statistics, Probability and Mathematics</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org6357a8b" class="outline-3">
+<h3 id="org6357a8b"><span class="section-number-3">2.1</span> Statistics</h3>
+<div class="outline-text-3" id="text-2-1">
+</div>
+<div id="outline-container-org0db0709" class="outline-4">
+<h4 id="org0db0709"><span class="section-number-4">2.1.1</span> Central Limit Theorem</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<p>
+Given a population with mean &mu; and standard deviation &sigma;, then randomly sampling from the population means the <b>distribution</b> of teh &mu; 's will be approximately normal distributed, with means<br />
+as the population mean and estimated standard deviation \[\frac{s}{\sqrt{n}}\], where <i>s</i> is the standard deviation of the sample and <i>n</i> is the number of observartions in the sample.<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org7e0f579" class="outline-4">
+<h4 id="org7e0f579"><span class="section-number-4">2.1.2</span> Hypothesis Testing</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<p>
+It is a method of statistical inference. Based on some data collected, one can calucalte the probability (p-value) of observing the statistics from the data,<br />
+given the null hypothesis is true. Based on the comparison of the p-value with the significance level (usually 0.05), one can decide to accept or reject the alternative hypothesis.<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org0f6eb7e" class="outline-4">
+<h4 id="org0f6eb7e"><span class="section-number-4">2.1.3</span> p-value</h4>
+<div class="outline-text-4" id="text-2-1-3">
+<p>
+The <b>p-value</b> is the probability of observeing the data if the null hypothesis is true. Smaller p-value means a higher chance of rejecting the null hypothesis.<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org0c53be2" class="outline-4">
+<h4 id="org0c53be2"><span class="section-number-4">2.1.4</span> Confidence intervall</h4>
+<div class="outline-text-4" id="text-2-1-4">
+</div>
+<ol class="org-ol">
+<li><a id="orga3c46a9"></a>What is it?<br />
+<div class="outline-text-5" id="text-2-1-4-1">
+<p>
+The <b>confidence level</b> in hypothesis testing is the probability of not rejecting teh null hypothesis, when the null hypothesi is True:<br />
+P(Not rejecting H0 | H0 is true) = 1 - P(Rejecting H0 | H0 = true). The default confidence level is 95%.<br />
+</p>
+</div>
+</li>
+<li><a id="org2a8e603"></a>Calculating the 95% conficence interval given normal distribution<br />
+<div class="outline-text-5" id="text-2-1-4-2">
+<p>
+\[\bar{x} \pm z \times \frac{s}{\sqrt{n}}\]<br />
+where <i>s</i> is the smapel standard deviation, calculated as<br />
+</p>
+
+<p>
+\[s = \sqrt{\frac{1}{N-1} \times \sum_{i=1}^{N} (x_i - \bar{x})^2}\]<br />
+and <i>z</i> is the number of standard deviations away from the sample mean, which with normal distribution is 1.96, as this, applied to both ends of the mean (&plusmn;),<br />
+is the interval on the x axis of the normal distribution, that contains 95% of the data.<br />
+</p>
+</div>
+</li>
+<li><a id="orgcab8cb5"></a>Interpretation<br />
+<div class="outline-text-5" id="text-2-1-4-3">
+<p>
+If I obtain a 95% confidence interval for the test results, what I am actually saying is that 95% of the time, when we calculate a confidence interval in this way, the true test means will be between 75 and 85, and 5% of the time, it will not<br />
+</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org7e41925" class="outline-4">
+<h4 id="org7e41925"><span class="section-number-4">2.1.5</span> Statistical power</h4>
+<div class="outline-text-4" id="text-2-1-5">
+<p>
+Measures the probability of rejecting the null hypotyhesis when the null hypothesis is false:<br />
+P(Reject H0 | H0 is false) = 1 - P(Not rejecting H0| H0 is false). This is usually set to 80%<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org7b38408" class="outline-4">
+<h4 id="org7b38408"><span class="section-number-4">2.1.6</span> Type I and II error</h4>
+<div class="outline-text-4" id="text-2-1-6">
+</div>
+<ol class="org-ol">
+<li><a id="org07512b9"></a>Type I error<br />
+<div class="outline-text-5" id="text-2-1-6-1">
+<p>
+P(Rejecting H0|H0 is True), is False Positive, is &alpha;, is 1 - confidence level<br />
+</p>
+</div>
+</li>
+<li><a id="org0952600"></a>Type II error<br />
+<div class="outline-text-5" id="text-2-1-6-2">
+<p>
+P(Not Rejecting H0|H0 is False), is False Negative, is &beta;, is 1 - statistical power<br />
+</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orged7c396" class="outline-4">
+<h4 id="orged7c396"><span class="section-number-4">2.1.7</span> How to detect outliers</h4>
+<div class="outline-text-4" id="text-2-1-7">
+<p>
+<b>Outliers</b> are observations that differ significantly from other observations. Detecting outliers is the same as defining the difference. The most straightforward way is to plot<br />
+the variable and find the data points that are far away from others. To quantify the difference, we can use the quartiles and <b>Interquartile Range</b> (IQR). IQR is the third quartile minus the first quartile (Q3 - Q1). The outliers are any data points that are less than Q1 - 1.5 &times; IQR, or larger than Q3 + 1.5 &times; IQR.<br />
+</p>
+
+<p>
+If the data follows a normal distribution, the outliers are the points with a Z score larger than 3 or smaller than -3.<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org13475be" class="outline-4">
+<h4 id="org13475be"><span class="section-number-4">2.1.8</span> Maximum Likelihood Estimation</h4>
+<div class="outline-text-4" id="text-2-1-8">
+<p>
+MLE is estimating the parameters &theta; by maximizing the likelihood function using Bayes' theorem. According to Bayes' theorem:<br />
+\[P(\theta|y) = \frac{P(y|\theta) \times P(\theta)}{P(y)}\]<br />
+where P(&theta;) is the prior distribution for the parameter; P(y|&theta;) is the likelihood function describing the likelihood of observing the data points y when we have<br />
+the parameter &theta;; P(y) is the evidence, which is usually used to normalise the probability. MAximising P(&theta; | y) is the goal of finding the optimal &theta;, where we maximise<br />
+the conditional probability of having &theta; given all the data points y. In practice, we can easily calculate P(y|&theta;) once we know the distribution. Thus, we solve the optimising problem by<br />
+maximising the likelihood function P(y|&theta;) with respect to &theta;.<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org82f6ac4" class="outline-4">
+<h4 id="org82f6ac4"><span class="section-number-4">2.1.9</span> Correlation</h4>
+<div class="outline-text-4" id="text-2-1-9">
+<p>
+\[Cor(X,Y) = \frac{Cov(X,Y)}{s_x \times s_y}\]<br />
+where<br />
+\[Cov(X,Y) = \frac{\sum(x_i - \bar{x})(y_i - \bar{y})}{N - 1}\]<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org4a0fdc6" class="outline-4">
+<h4 id="org4a0fdc6"><span class="section-number-4">2.1.10</span> Simpson's Paradox</h4>
+<div class="outline-text-4" id="text-2-1-10">
+<p>
+Simpson’s paradox refers to the situations in which a trend or relationship that is observed within multiple groups disappears or reverses when the groups are combined. The quick answer to why there is Simpson’s paradox is the existence of confounding variables.<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org2d1726e" class="outline-4">
+<h4 id="org2d1726e"><span class="section-number-4">2.1.11</span> Confounding variable</h4>
+<div class="outline-text-4" id="text-2-1-11">
+<p>
+A <b>confounding varible</b> is a variable that is correlated with both the dependent variable and the independent variable. Failing to control for the confounding variable can cause<br />
+<b>Simpson's Paradox</b><br />
+</p>
+</div>
+</div>
+<div id="outline-container-org62afd46" class="outline-4">
+<h4 id="org62afd46"><span class="section-number-4">2.1.12</span> </h4>
+</div>
+</div>
+<div id="outline-container-org71690d5" class="outline-3">
+<h3 id="org71690d5"><span class="section-number-3">2.2</span> Basic Probability Theory</h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li><i>P(A)</i>: 'probability of A', where <i>A</i> is an event we are interested in<br /></li>
+<li><i>P(A|B)</i>: 'probability of <i>A</i> given <i>B</i> occurs'<br /></li>
+<li><i>P(not A)</i>: 'probability of not <i>A</i>', probability that <i>A</i> does not occur<br /></li>
+<li><i>P(B)</i>: 'probability that <i>B</i> occirs'<br /></li>
+</ul>
+</div>
+
+
+<div id="outline-container-org1e92cf4" class="outline-4">
+<h4 id="org1e92cf4"><span class="section-number-4">2.2.1</span> Probability Rules</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<ol class="org-ol">
+<li><p>
+General rules<br />
+</p>
+
+<p>
+\[0 \le P(A) \le 1\]<br />
+\[\sum_{n=1}^{i}P(A_i) = 1\]<br />
+\[P(\neg A) = 1 - P(A)\]<br />
+</p>
+
+<p>
+1.1 Disjoint events<br />
+   \[P(A \cup B) = P(A) + P(B)\]<br />
+   here, &cup; is the union, meaning or<br />
+</p></li>
+</ol>
+
+
+
+<ol class="org-ol">
+<li><p>
+<b>The Addition Rule</b><br />
+(probability that either one of two events happen, but not both)<br />
+ \[P(A \cup B) = P(A) + P(B) - P(A \cap B)\]<br />
+</p>
+
+<p>
+If A and B are <b>mutually exclusinv events</b>, or those that can not occur together, then the third term is 0, and the rule reduces to:<br />
+<i>P(A &cup; B) = P(A) + P(B)</i>. An example is a coin flip, where you can't flip it and both sides tur nup at the same time.<br />
+</p></li>
+
+<li><p>
+<b>The multiplication rule</b><br />
+</p>
+
+<p>
+\[P(A \cap B) = P(A) \times P(B|A) or P(B) \times P(A|B)\]   <br />
+</p>
+
+<p>
+If <i>A</i> and <i>B</i> are <b>independent</b> events, we can reduce the formula to <i>P(A and B) = P(A) &times; P(B)</i>. The term <b>independent</b> refers to any event<br />
+whose outcome is not affected by the outcome of another event. For instance, consider the second of two coin flips, which still has a .5 probability<br />
+of landing heads, regardless of the outcome of the first toss.<br />
+</p>
+
+<p>
+What is the probability to come up with tails on the first toss and heads on the second toss?<br />
+</p>
+
+<p>
+<i>P = P(tails) &times; P(heads) = .5 &times; .5 = .25 = 25%</i><br />
+</p></li>
+
+<li><p>
+The <b>complement rule</b><br />
+\[P(\neg A) = 1 - P(A)\]<br />
+</p>
+
+<p>
+This rule builds upon the mutually exclusive nature of <i>P(A)</i> and <i>P(not A)</i>. These two events can never occur together, but one of them always has to occur.<br />
+Therefore <i>P(A) + P(not A) = 1</i>.<br />
+For example, if the weatherman says there is a .3 chance of rain tomorrow, what is the chance of no rain?<br />
+</p>
+
+<p>
+<i>P(no rain) = 1 - P(rain) = 1 - .3 = .7 = 70%</i><br />
+</p></li>
+
+<li><p>
+<b>Conditional probability: general multiplication rule</b><br />
+</p>
+
+<p>
+\[P(A \cap B) = P(A) \times P(B|A)\]<br />
+</p></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org07923ed" class="outline-4">
+<h4 id="org07923ed"><span class="section-number-4">2.2.2</span> The Law of Total Probability</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<p>
+\[P(A) = P(A|B) \times P(B) + P(A|\neg B) \times P(\neg B)\]<br />
+</p>
+
+<p>
+For example: What is the probability of a person's favourite color being blue, given the following:<br />
+</p>
+
+<ul class="org-ul">
+<li>Left-handed people have blue as a favourite color 30% of the time<br /></li>
+<li>Right-handed people like blue 40% of the time<br /></li>
+<li>Left-handed people make up 10% of the population<br /></li>
+</ul>
+
+<p>
+<i>P(blue) = P(blue | left) &times; P(left) + P(blue | right) * P(right)</i><br />
+        <i>= .3 &times; .1 + .4 &times; .1</i><br />
+        <i>= .39 = <b>39%</b></i> <br />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb41cf37" class="outline-3">
+<h3 id="orgb41cf37"><span class="section-number-3">2.3</span> Joint, Marginal and Conditional Probability</h3>
+<div class="outline-text-3" id="text-2-3">
+</div>
+<div id="outline-container-org9c45fa0" class="outline-4">
+<h4 id="org9c45fa0"><span class="section-number-4">2.3.1</span> Probability of one varible</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<p>
+\[Probability = \frac{numberofdesiredoutcomes}{numberofpossibleoutcomes}\]<br />
+</p>
+
+<p>
+The probability of a complement is the probability of an event not occouring<br />
+\[P(\neg A) = 1 - P(A)\]<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc113f18" class="outline-4">
+<h4 id="orgc113f18"><span class="section-number-4">2.3.2</span> Probability of multiple random variables</h4>
+<div class="outline-text-4" id="text-2-3-2">
+</div>
+<ol class="org-ol">
+<li><a id="org4f23c6b"></a>Joint Probability<br />
+<div class="outline-text-5" id="text-2-3-2-1">
+<p>
+'The probability of two events <i>A</i> and <i>B</i> to occur simultaneously'<br />
+</p>
+</div>
+</li>
+
+<li><a id="org4f4eb7f"></a>Marginal Probability<br />
+<div class="outline-text-5" id="text-2-3-2-2">
+<p>
+'The probability of an event irrespective of the outcome of another variable'<br />
+But also: Probability of event X = A given variable Y???<br />
+</p>
+</div>
+</li>
+<li><a id="org373a7c6"></a>Conditional Probability<br />
+<div class="outline-text-5" id="text-2-3-2-3">
+<p>
+'The probability of one event occuring i nthe presence of a second event'<br />
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org7660a81" class="outline-3">
+<h3 id="org7660a81"><span class="section-number-3">2.4</span> Bayes Theorem (conditional probability)</h3>
+<div class="outline-text-3" id="text-2-4">
+</div>
+<div id="outline-container-org5a14214" class="outline-4">
+<h4 id="org5a14214"><span class="section-number-4">2.4.1</span> The Theorem</h4>
+<div class="outline-text-4" id="text-2-4-1">
+<p>
+\[P(A|B) = \frac{P(B|A) \times P(A)}{P(B)}\]<br />
+</p>
+
+<p>
+where <i>A</i> and <i>B</i> are events, <i>P(A|B)</i> is the conditional probability thate event <i>A</i> occurs, given that event <i>B</i> already occured (<i>P(B|A)</i> means the same, just with <i>A</i> and <i>B</i> reversed).<br />
+<i>P(A)</i> and <i>P(B)</i> are the marginal probabilities of event <i>A</i> and event <i>B</i> occuring respectively.<br />
+</p>
+
+<p>
+Extended version:<br />
+</p>
+
+<p>
+\[P(A|B) = \frac{P(B|A) \times P(A)}{P(B|A) \times P(A) + P(B|\neg A) \times P(\neg A)}\]<br />
+</p>
+
+<p>
+here, '&not;' means 'not'.<br />
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="org7d1f929"></a>Important:<br />
+<div class="outline-text-5" id="text-2-4-1-1">
+<p>
+\[P(\neg A) = 1 - P(A)\] and<br />
+\[P(B | \neg A) = 1 - P(\neg B | \neg A)\]<br />
+</p>
+</div>
+</li>
+
+<li><a id="org620bf85"></a>Naming the Terms<br />
+<div class="outline-text-5" id="text-2-4-1-2">
+<ul class="org-ul">
+<li><i>P(A|B)</i>: <b>posterior probability</b> <br /></li>
+<li><i>P(A)</i>: <b>prior probability</b><br /></li>
+</ul>
+
+<p>
+Sometimes<br />
+</p>
+
+<ul class="org-ul">
+<li><i>P(B|A)</i>: <b>Likelihood</b> and<br /></li>
+<li><i>P(B)</i>: <b>Evidence</b><br /></li>
+</ul>
+
+<p>
+\[Posterior = \frac{Likelihood \times Prior}{Evidence}\]<br />
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #616e88;"># </span><span style="color: #616e88;">Import packages</span>
+
+<span style="color: #81A1C1;">import</span> random
+<span style="color: #81A1C1;">from</span> scipy.stats <span style="color: #81A1C1;">import</span> bernoulli
+
+<span style="color: #616e88;"># </span><span style="color: #616e88;">Function to pick a coin at random</span>
+<span style="color: #81A1C1;">def</span> <span style="color: #88C0D0;">pick_random_coin</span>(fair_coin_probablity):
+    <span style="color: #81A1C1;">if</span> random.random() &lt; fair_coin_probablity:
+        <span style="color: #81A1C1;">return</span> bernoulli_process(0.5)
+    <span style="color: #81A1C1;">else</span>:
+        <span style="color: #81A1C1;">return</span> bernoulli_process(1.0)
+
+<span style="color: #D8DEE9;">a</span> = 0  <span style="color: #616e88;"># </span><span style="color: #616e88;">number of times we get 10 heads in a row AND coin was unfair</span>
+<span style="color: #D8DEE9;">b</span> = 0  <span style="color: #616e88;"># </span><span style="color: #616e88;">total number of times we get 10 heads in a row</span>
+<span style="color: #81A1C1;">for</span> __ <span style="color: #81A1C1;">in</span> <span style="color: #81A1C1;">xrange</span>(100000):
+    <span style="color: #D8DEE9;">coin</span> = pick_random_coin(0.99)
+    <span style="color: #81A1C1;">if</span> <span style="color: #81A1C1;">True</span> <span style="color: #81A1C1;">not</span> <span style="color: #81A1C1;">in</span> [coin.<span style="color: #81A1C1;">next</span>() <span style="color: #81A1C1;">for</span> __ <span style="color: #81A1C1;">in</span> <span style="color: #81A1C1;">xrange</span>(10)]:
+        <span style="color: #D8DEE9;">b</span> += 1
+        <span style="color: #616e88;"># </span><span style="color: #616e88;">check to see if the coin is unfair, or we</span>
+        <span style="color: #616e88;"># </span><span style="color: #616e88;">just got really lucky</span>
+        <span style="color: #81A1C1;">if</span> coin.gi_frame.f_locals[<span style="color: #A3BE8C;">'p'</span>] &gt; 0.6:
+            <span style="color: #D8DEE9;">a</span> += 1
+
+<span style="color: #81A1C1;">print</span> <span style="color: #81A1C1;">float</span>(a) / b
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org7654b6f" class="outline-4">
+<h4 id="org7654b6f"><span class="section-number-4">2.4.2</span> Some notations</h4>
+<div class="outline-text-4" id="text-2-4-2">
+<ul class="org-ul">
+<li><b>Marginal Probability</b>: The probability of an event irrespective of the outcomes of other random variables (<i>P(A)</i>)<br /></li>
+<li><b>Joint Probability</b>: Probability of two (or more) simultaneous events, e.g. <i>P(A &cap; B)</i> (= <i>P(A) + P(B)</i>)<br /></li>
+<li><b>Conditional Probability</b>: Probability of one (or more) event given the occurence if another event, e.g. <i>P(A|B)</i><br /></li>
+</ul>
+
+<p>
+The <b>joint probability</b> can be calculated using the conditional probability:<br />
+</p>
+<ul class="org-ul">
+<li><i>P(A,B) = P(A|B) &times; P(B)</i><br />
+which is called the product rule. The joint probability is symmetrical, e.g. <i>P(A,B) = P(B,A)</i><br /></li>
+</ul>
+
+<p>
+The <b>conditional probability</b> can be calculated using the <b>joint probability</b>:<br />
+\[P(A|B) = \frac{P(A,B)}{P(B)}\]<br />
+</p>
+
+<p>
+The <b>conditional probability</b> is not symmetrical; e.g.:<br />
+\[P(A|B) \ne P(B|A)\]<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbaf0c0b" class="outline-4">
+<h4 id="orgbaf0c0b"><span class="section-number-4">2.4.3</span> Machine learning models where it is used</h4>
+<div class="outline-text-4" id="text-2-4-3">
+<ol class="org-ol">
+<li>Naive Bayes<br /></li>
+<li>Bayes Optimal Classifier<br /></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd071abc" class="outline-3">
+<h3 id="orgd071abc"><span class="section-number-3">2.5</span> Contingency table and binary classification</h3>
+<div class="outline-text-3" id="text-2-5">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">Positive class</th>
+<th scope="col" class="org-left">Negative class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><b>Positive Prediciton</b></td>
+<td class="org-left">True Positive (TP)</td>
+<td class="org-left">False Positive (FP)</td>
+</tr>
+
+<tr>
+<td class="org-left"><b>Negative Prediction</b></td>
+<td class="org-left">False Negatives (FN)</td>
+<td class="org-left">True Negatives (TB)</td>
+</tr>
+</tbody>
+</table>
+
+<ul class="org-ul">
+<li>True Positive Rate / Sensitivity / Recall / \[P(B|A) = \frac{TP}{TP + FN}\]<br /></li>
+<li>False Positive Rate / \[P(B| \neg A) = \frac{FP}{FP + TN}\]<br /></li>
+<li>True Negative Rate / Specificity / \[P(\neg B| \neg A) = \frac{TN}{TN + FP}\]<br /></li>
+<li>False Negative Rate / \[P(\neg B | A) = \frac{FN}{FN + TP}\]<br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org28c6182" class="outline-2">
+<h2 id="org28c6182"><span class="section-number-2">3</span> Probability examples</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org7543c6c" class="outline-3">
+<h3 id="org7543c6c"><span class="section-number-3">3.1</span> Example 1: Cancer screening</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+<b>Problem</b>: If a randomly selected patient has a breast cancer test, and it comes back positive, what is the probability that the patient has cancer?<br />
+</p>
+
+<p>
+<b>Sensitivity</b>: 85%<br />
+<b>Specificity</b>: 95%<br />
+<b>Breast cancer in population</b>: 1 in 5000 = 0.02%<br />
+</p>
+
+<p>
+With Bayes:<br />
+</p>
+
+<p>
+\[P(cancer | positive test) = \frac{P(positive test | cancer) \times P(cancer)}{P(positive test)}\]<br />
+</p>
+
+<p>
+this transforms to<br />
+</p>
+
+<p>
+\[P(cancer | positive test) = \frac{P(positive test | cancer) \times P(cancer)}{P(positive test | cancer) \times P(cancer) + P(positive test | \neg cancer) \times P(\neg cancer)}\]<br />
+</p>
+
+<p>
+here:<br />
+</p>
+<ul class="org-ul">
+<li><i>P(positive test | cancer)</i> = .85<br /></li>
+<li><i>P(cancer)</i>: .0002<br /></li>
+<li><i>P(&not; cancer)</i>: .9998<br /></li>
+<li><i>P(negative test | &not; cancer)</i>: .95 &rarr; P(positive test | &not; cancer) = 1- P(negative test | &not; cancer) = 1 - .95 = .05<br /></li>
+</ul>
+
+<p>
+That means:<br />
+</p>
+
+<p>
+\[P(cancer | positive test) = \frac{.85 \times .0002}{.85 \times .0002 + .05 \times .9998} = .0034 = 0.3%\]<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgb516f5a" class="outline-3">
+<h3 id="orgb516f5a"><span class="section-number-3">3.2</span> Example 2: The Birthday problem</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Q: What is the probability that any two people in a room will share the same birthday?<br />
+</p>
+
+<ul class="org-ul">
+<li>Let's start with three people. The independent probabilities for every single person to have their birthday on a <span class="underline">given</span> day are:<br /></li>
+</ul>
+<p>
+\[P(A_1) = \frac{1}{365}\]<br />
+\[P(A_2) = \frac{1}{365}\]<br />
+\[P(A_3) = \frac{1}{365}\]<br />
+</p>
+
+<ul class="org-ul">
+<li>The probability that neither of those share a birthday is:<br /></li>
+</ul>
+<p>
+\[P(A_1 \ne A_2 \ne A_3) = \frac{365}{365} \times \frac{364}{365} \times \frac{363}{365}\]<br />
+</p>
+
+<ul class="org-ul">
+<li>Given two people, what is the probability that they share a birthday:<br /></li>
+</ul>
+<p>
+\[P(A_1 \cap A_2) = P(A_1) \times P(A_2|A_1) = \frac{365}{365} \times \frac{1}{365}\]<br />
+</p>
+
+<ul class="org-ul">
+<li>Given three people, what is the probability that any two of them or more share the same birthday:<br /></li>
+</ul>
+<p>
+\[P(A_1 \cap A_2) = P(A_1) \times P(A_2|A_1) = \frac{365}{365} \times \frac{1}{365}\]<br />
+\[P(A_2 \cap A_3) = P(A_2) \times P(A_3|A_2) = \frac{365}{365} \times \frac{1}{365}\]<br />
+\[P(A_3 \cap A_1) = P(A_3) \times P(A_1|A_3) = \frac{365}{365} \times \frac{1}{365}\]<br />
+\[P(A_1 | A_2 \cap \neg A_3) = \frac{365}{365} \times \frac{1}{365} \times \frac{364}{365}\]<br />
+\[P(A_1 \cap A_2 \cap A_3) = P(A_1) \times P(A_2|A_1) + P(A_3) \times P(A_3|A_2 \cap A_3)\]<br />
+</p>
+
+
+<p>
+BUT<br />
+</p>
+
+<p>
+\[P(\geq 2 share birthday) = 1 - P(\neg share birthday) = 1 - \frac{365}{365} \times \frac{364}{365} \times \frac{353}{365}\]<br />
+</p>
+
+<p>
+generalised:<br />
+</p>
+
+<p>
+\[P(\neg share bday) = \frac{365!}{(365 - n)! \times 365^n}\]<br />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Sebastian Rauschert, PhD</p>
+<p class="date">Created: 2021-03-01 Mon 17:32</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

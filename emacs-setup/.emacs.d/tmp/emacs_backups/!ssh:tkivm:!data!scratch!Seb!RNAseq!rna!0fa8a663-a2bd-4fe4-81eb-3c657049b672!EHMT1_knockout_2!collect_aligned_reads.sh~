@@ -1,0 +1,8 @@
+#!/bin.sh
+
+folder=`ls /data/scratch/Seb/RNAseq/rna/0fa8a663-a2bd-4fe4-81eb-3c657049b672/EHMT1_knockout_2/align`
+
+for i in $folder
+         do
+             echo $i
+done
